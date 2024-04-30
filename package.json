@@ -1,0 +1,52 @@
+{
+  "name": "mdk-ui-common",
+  "version": "1.0.3",
+  "description": "Monax Development Kit - UI Common Components",
+  "type": "module",
+  "license": "Apache-2.0",
+  "keywords": [],
+  "repository": "git@github.com:monax/mdk-ui-common.git",
+  "author": "Monax Labs <hello@monax.io>",
+  "main": "dist/index.js",
+  "files": [
+    "LICENSE",
+    "package.json",
+    "dist"
+  ],
+  "exports": {
+    "./hooks": "./dist/hooks/index.js",
+    "./utils": "./dist/utils/index.js"
+  },
+  "scripts": {
+    "build": "pnpm build:ts",
+    "build:ts": "tsc --build",
+    "lint": "pnpm run lint:js && pnpm run lint:types",
+    "lint:js": "eslint .",
+    "lint:types": "tsc --noEmit",
+    "format": "prettier --write .",
+    "prepack": "tsc -P ./tsconfig.prod.json"
+  },
+  "dependencies": {
+    "@sentry/react": "^7.112.2",
+    "@types/lodash": "^4.17.0",
+    "debounce": "^2.0.0",
+    "lodash": "^4.17.21",
+    "mdk-schema": "github:monax/mdk-schema",
+    "react-router-dom": "^6.23.0",
+    "sonner": "^1.4.41",
+    "use-clipboard-copy": "^0.2.0",
+    "zod": "^3.22.2",
+    "zustand": "^4.4.3"
+  },
+  "devDependencies": {
+    "@sentry/types": "^7.81.1",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@types/uuid": "^9.0.6",
+    "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.4",
+    "typescript": "^5.3.3",
+    "vite": "^4.5.0",
+    "vitest": "^0.34.6"
+  }
+}
