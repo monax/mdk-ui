@@ -5,7 +5,7 @@ export const useQueryStringEntries = () => {
   const [searchParams] = useSearchParams();
 
   const params = useMemo(() => {
-    let entries: Record<string, string | string[]> = {};
+    const entries: Record<string, string | string[]> = {};
 
     searchParams.forEach((v, k) => {
       if (entries[k] !== undefined) return;
