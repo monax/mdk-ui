@@ -1,8 +1,11 @@
-import * as Sentry from '@sentry/react';
+import type { Breadcrumb, BrowserOptions } from '@sentry/react';
 import {
   addBreadcrumb as addBreadcrumbSentry,
-  Breadcrumb,
+  breadcrumbsIntegration,
   captureException as captureExceptionSentry,
+  init as initialiseSentry,
+  reactRouterV6BrowserTracingIntegration,
+  replayIntegration,
 } from '@sentry/react';
 import type { CaptureContext } from '@sentry/types';
 import { isErrorLike } from 'mdk-schema';
@@ -28,21 +31,16 @@ type Config = {
 
 export const initSentry = (config: Config): void => {
   if (!config.sentryDsn) return;
-  Sentry.init(assembleConfig(config));
-
-  Sentry.setTags({
-    component: config.component,
-  });
+  initialiseSentry(assembleConfig(config));
 };
 
-const assembleConfig = (config: Config): Sentry.BrowserOptions => {
+const assembleConfig = (config: Config): BrowserOptions => {
   return {
     dsn: config.sentryDsn,
     release: `v${config.appVersion}`,
     environment: config.stack,
     integrations: [
-      new Sentry.Integrations.HttpContext(),
-      new Sentry.Integrations.Breadcrumbs({
+      breadcrumbsIntegration({
         console: true,
         dom: true,
         fetch: false,
@@ -50,19 +48,22 @@ const assembleConfig = (config: Config): Sentry.BrowserOptions => {
         sentry: false,
         xhr: true,
       }),
-      new Sentry.BrowserTracing({
-        routingInstrumentation: Sentry.reactRouterV6Instrumentation(
-          React.useEffect,
-          useLocation,
-          useNavigationType,
-          createRoutesFromChildren,
-          matchRoutes,
-        ),
+      reactRouterV6BrowserTracingIntegration({
+        useEffect: React.useEffect,
+        useLocation,
+        useNavigationType,
+        createRoutesFromChildren,
+        matchRoutes,
       }),
-      new Sentry.Replay(),
+      replayIntegration(),
     ],
     tracesSampleRate: 1.0,
     replaysSessionSampleRate: 0.1,
     replaysOnErrorSampleRate: 1.0,
+    initialScope: {
+      tags: {
+        component: config.component,
+      },
+    },
   };
 };
