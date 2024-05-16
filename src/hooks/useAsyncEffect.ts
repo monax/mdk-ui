@@ -1,8 +1,8 @@
-import { DependencyList, useEffect } from 'react';
+import { type DependencyList, useEffect } from 'react';
 
 export const useAsyncEffect = (asyncCallable: () => Promise<void>, deps: DependencyList): void => {
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     asyncCallable();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 };

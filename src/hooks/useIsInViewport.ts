@@ -1,3 +1,4 @@
+import type React from 'react';
 import { useEffect, useMemo, useState } from 'react';
 
 export const useIsInViewport = (ref: React.MutableRefObject<Element | null>, options?: IntersectionObserverInit) => {

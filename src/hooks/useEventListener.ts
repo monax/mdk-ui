@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef } from 'react';
+import { type RefObject, useEffect, useRef } from 'react';
 
 export const useEventListener = <T extends HTMLElement = HTMLDivElement>(
   eventName: keyof WindowEventMap,
@@ -11,7 +11,7 @@ export const useEventListener = <T extends HTMLElement = HTMLDivElement>(
   useEffect(() => {
     // Define the listening target
     const targetElement: T | Window = element?.current || window;
-    if (!(targetElement && targetElement.addEventListener)) {
+    if (!targetElement?.addEventListener) {
       return;
     }
 
