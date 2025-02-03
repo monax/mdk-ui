@@ -1,6 +1,6 @@
 {
   "name": "@monaxlabs/mdk-ui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Monax Development Kit - UI Common Components",
   "type": "module",
   "license": "Apache-2.0",
@@ -26,7 +26,7 @@
     "prepack": "tsc -P ./tsconfig.prod.json"
   },
   "dependencies": {
-    "@monaxlabs/mdk-schema": "^1.0.16",
+    "@monaxlabs/mdk-schema": "^1.0.17",
     "@sentry/browser": "^7.112.2",
     "@sentry/react": "^7.112.2",
     "debounce": "^2.0.0",
