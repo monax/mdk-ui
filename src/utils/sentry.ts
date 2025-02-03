@@ -1,3 +1,4 @@
+import { isErrorLike } from '@monaxlabs/mdk-schema';
 import type { Breadcrumb, BrowserOptions } from '@sentry/react';
 import {
   addBreadcrumb as addBreadcrumbSentry,
@@ -8,7 +9,6 @@ import {
   replayIntegration,
 } from '@sentry/react';
 import type { CaptureContext } from '@sentry/types';
-import { isErrorLike } from 'mdk-schema';
 import React from 'react';
 import { createRoutesFromChildren, matchRoutes, useLocation, useNavigationType } from 'react-router-dom';
 

@@ -1,5 +1,4 @@
 export * from './useAsyncEffect.js';
-export * from './useClipboard.js';
 export * from './useDebounce.js';
 export * from './useEffectOnce.js';
 export * from './useEventListener.js';
